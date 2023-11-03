@@ -51,7 +51,7 @@ def spam(count, sleep, mail, fromm, to):
     to = to.split("\n")
     for x in frommm:
         try:
-            server = smtp("smtp.{x[0].split('@')[1]}", 465)
+            server = smtp(f"smtp.{x[0].split('@')[1]}", 465)
             server.ehlo()
             server.login(x[0], x[1])
             print(f" [+] Удалось войти в аккаунт {x[0]}:{x[1]}")
