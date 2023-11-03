@@ -2,6 +2,9 @@ import os
 from smtplib import SMTP_SSL as smtp
 import sys
 import time
+from email.message import EmailMessage
+import re
+
 if os.sys.platform == "win32":
     def cls():
         os.system("cls")
@@ -58,7 +61,16 @@ def spam(count, sleep, mail, fromm, to):
             for j in to:
                 for i in range(count):
                     try:
-                        server.sendmail(x[0], j, mail.encode("utf-8"))
+                        email = EmailMessage()
+                        email["From"] = x[0]
+                        email["To"] = j
+                        if "\n\n" in mail:
+                            subject = mail.strip().split("\n\n")[0]
+                            email["Subject"] = subject
+                            email.set_content(mail.replace(subject, "").strip())
+                        else:
+                            email.set_conteng(mail.strip())
+                        server.sendmail(x[0], j, email.as_string())
                         print(f" [+] Успешно отправлено письмо №{i} с {x[0]} на {j}")
                     except BaseException as err:
                         print(f" [-] Не удалось отправить письмо №{i} с {x[0]} на {j}:")
