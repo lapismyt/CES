@@ -58,7 +58,7 @@ def spam(count, sleep, mail, fromm, to):
             for j in to:
                 for i in range(count):
                     try:
-                        server.sendmail(x[0], j, mail)
+                        server.sendmail(x[0], j, mail.encode("utf-8"))
                         print(f" [+] Успешно отправлено письмо №{i} с {x[0]} на {j}")
                     except BaseException as err:
                         print(f" [-] Не удалось отправить письмо №{i} с {x[0]} на {j}:")
