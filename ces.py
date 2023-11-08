@@ -62,6 +62,7 @@ def spam(count, sleep, mail, fromm, to):
                 for i in range(count):
                     try:
                         email = EmailMessage()
+                        email.charset = "utf-8"
                         email["From"] = x[0]
                         email["To"] = j
                         if "\n\n" in mail:
@@ -69,7 +70,7 @@ def spam(count, sleep, mail, fromm, to):
                             email["Subject"] = subject
                             email.set_content(mail.replace(subject, "").strip())
                         else:
-                            email.set_conteng(mail.strip())
+                            email.set_content(mail.strip())
                         server.sendmail(x[0], j, email.as_string())
                         print(f" [+] Успешно отправлено письмо №{i} с {x[0]} на {j}")
                     except BaseException as err:
